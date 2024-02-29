@@ -5,7 +5,7 @@ const Quiz = () => {
 
   return (
     <main>
-      <h1>{t("asdfds")}</h1>
+      <h1>{t("test.test")}</h1>
       <p>{t("welcome")}</p>
     </main>
   );

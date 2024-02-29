@@ -1,8 +1,12 @@
 import Link from "next/link";
 import Card from "@/components/ui/Card";
+import { useRouter } from "next/router";
+import { storage } from "@/helpers/utils";
+import { quizVariants } from "@/helpers/utils";
 
 const FirstStep = () => {
-  const handleProcedd = () => {};
+  const router = useRouter();
+  const { pathname, asPath, query } = router;
 
   const variants = [
     {
@@ -11,33 +15,34 @@ const FirstStep = () => {
     },
     {
       label: "French",
-      value: "fr", // ?
+      value: "fr",
     },
     {
       label: "German",
-      value: "ger", // ?
+      value: "de",
     },
     {
       label: "Spanish",
-      value: "sp", //?
+      value: "es",
     },
   ];
 
-  const handleSelect = (value) => {
-    console.log(value);
+  const handleSelect = async (lang) => {
+    await router.push({ pathname, query }, asPath, { locale: lang });
+    await router.replace("/quiz/2");
+    storage.setItem("I18N_LANGUAGE", lang);
   };
 
   return (
     <div>
-      <div className="text-center mt-3">
-        <div className="text-3xl font-semibold">What is your preferred language?</div>
-        <div className="mt-3 text-zinc-400">Choose language</div>
+      <div className="text-center mb-6">
+        <div className="text-3xl font-semibold mb-6">What is your preferred language?</div>
+        <div className="mb-6 text-zinc-400">Choose language</div>
       </div>
-      <Link href="/quiz/2">Link to second page</Link>
 
-      <div>
-        {variants.map((el, i) => (
-          <Card onSelect={() => handleSelect(el.value)} label={el.label} value={el.value} key={i} />
+      <div className="grid gap-y-3 mb-5">
+        {quizVariants.firstStep.map((el, i) => (
+          <Card onSelect={() => handleSelect(el.value)} label={el.label} key={i} />
         ))}
       </div>
     </div>

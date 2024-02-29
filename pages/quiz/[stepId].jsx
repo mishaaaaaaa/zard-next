@@ -1,13 +1,15 @@
 import { useMemo } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import FirstStep from "./steps/FirstStep";
 import SecondStep from "./steps/SecondStep";
 import ThirdStep from "./steps/ThirdStep";
+import QuizNavbar from "@/components/ui/QuizNavbar";
 import ProgressBar from "@/components/modules/ProgresBar/ProgressBar";
 
 const StepAddEdit = () => {
-  const { t } = useTranslation("translation");
+  const { t } = useTranslation();
   const router = useRouter();
   const { stepId } = router.query;
 
@@ -25,11 +27,22 @@ const StepAddEdit = () => {
   }, [stepId]);
 
   return (
-    <main className="min-h-screen border">
-      <ProgressBar />
+    <main className="min-h-screen">
+      <QuizNavbar />
       {dynamicStep}
     </main>
   );
 };
+
+export async function getServerSideProps(context) {
+  const stepId = context.query.stepId;
+
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale, ["common"])),
+      stepId,
+    },
+  };
+}
 
 export default StepAddEdit;

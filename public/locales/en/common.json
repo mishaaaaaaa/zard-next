@@ -1,4 +1,3 @@
 {
-  "hello": "Привет 1",
-  "welcome": "Welcome"
+  "quiz": { "test": "English" }
 }

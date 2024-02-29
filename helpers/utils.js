@@ -1,14 +1,53 @@
 export const storage = {
   setItem: (key, value) => {
-    window && window.localStorage.setItem(key, JSON.stringify(value));
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    }
   },
   getItem: (key) => {
-    const result = window && window.localStorage.getItem(key);
-    return JSON.parse(result);
+    if (typeof window !== "undefined") {
+      const result = window.localStorage.getItem(key);
+      return JSON.parse(result);
+    }
+    return null; // Либо вернуть что-то другое по умолчанию
   },
   removeItem: (key) => {
-    window && window.localStorage.removeItem(key);
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(key);
+    }
   },
+};
+
+export const STORAGE_STATE = {
+  QUIZ_STEP: "QUIZ_STEP",
+};
+
+export const totalQuizSteps = 5;
+
+export const quizVariants = {
+  firstStep: [
+    {
+      label: "English",
+      value: "en",
+    },
+    {
+      label: "French",
+      value: "fr",
+    },
+    {
+      label: "German",
+      value: "de",
+    },
+    {
+      label: "Spanish",
+      value: "es",
+    },
+  ],
+  secondStep: [
+    { label: "Female", emoji: "👩" },
+    { label: "Male", emoji: "👨" },
+    { label: "Other", emoji: "😉" },
+  ],
 };
 
 // const changeLanguageAction = (lang) => {
