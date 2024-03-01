@@ -1,15 +1,14 @@
 import { quizVariants } from "@/helpers/utils";
 import { useRouter } from "next/router";
+import { storage, STORAGE_STATE } from "@/helpers/utils";
 import Card from "@/components/ui/Card";
 
 const SecondStep = () => {
   const router = useRouter();
-  const { pathname, asPath, query } = router;
 
-  const handleSelect = async (lang) => {
-    await router.push({ pathname, query }, asPath, { locale: lang });
-    await router.replace("/quiz/2");
-    storage.setItem("I18N_LANGUAGE", lang);
+  const handleSelect = (gender) => {
+    storage.setItem(STORAGE_STATE.GENDER, gender);
+    router.replace("/quiz/3");
   };
 
   return (
@@ -22,7 +21,14 @@ const SecondStep = () => {
 
       <div className="grid grid-cols-3 gap-4">
         {quizVariants.secondStep.map((el, i) => (
-          <Card onSelect={handleSelect} label={el.label} emoji={el.emoji} key={i} customClass="text-center" />
+          <Card
+            onSelect={() => handleSelect(el.label)}
+            label={el.label}
+            emoji={el.emoji}
+            key={i}
+            customClass="text-center pt-6 pb-6"
+            selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
+          />
         ))}
       </div>
     </div>

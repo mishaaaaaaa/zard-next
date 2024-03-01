@@ -19,7 +19,9 @@ export const storage = {
 };
 
 export const STORAGE_STATE = {
-  QUIZ_STEP: "QUIZ_STEP",
+  I18N_LANGUAGE: "I18N_LANGUAGE",
+  GENDER: "GENDER",
+  AGE: "AGE",
 };
 
 export const totalQuizSteps = 5;
@@ -48,6 +50,7 @@ export const quizVariants = {
     { label: "Male", emoji: "👨" },
     { label: "Other", emoji: "😉" },
   ],
+  thirdStep: ["18-29 years", "30-39 years", "40-49 years", "50+"],
 };
 
 // const changeLanguageAction = (lang) => {
