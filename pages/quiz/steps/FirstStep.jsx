@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { storage, STORAGE_STATE } from "@/helpers/utils";
 import { quizVariants } from "@/helpers/utils";
 
-const FirstStep = () => {
+const FirstStep = ({ handleNextStep }) => {
   const router = useRouter();
   const { pathname, asPath, query } = router;
 
   const handleSelect = async (lang) => {
     await router.push({ pathname, query }, asPath, { locale: lang });
-    await router.replace("/quiz/2");
+    await handleNextStep();
     storage.setItem(STORAGE_STATE.I18N_LANGUAGE, lang);
   };
 

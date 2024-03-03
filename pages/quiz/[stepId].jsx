@@ -5,29 +5,38 @@ import { useRouter } from "next/router";
 import FirstStep from "./steps/FirstStep";
 import SecondStep from "./steps/SecondStep";
 import ThirdStep from "./steps/ThirdStep";
+import FourthStep from "./steps/FourthStep";
 import QuizNavbar from "@/components/ui/QuizNavbar";
-import ProgressBar from "@/components/modules/ProgresBar/ProgressBar";
+import FifthStep from "./steps/FifthStep";
 
 const StepAddEdit = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const { stepId } = router.query;
 
+  const nextStep = () => {
+    router.replace(`/quiz/${parseInt(stepId) + 1}`);
+  };
+
   const dynamicStep = useMemo(() => {
     switch (stepId) {
       case "1":
-        return <FirstStep />;
+        return <FirstStep handleNextStep={nextStep} />;
       case "2":
-        return <SecondStep />;
+        return <SecondStep handleNextStep={nextStep} />;
       case "3":
-        return <ThirdStep />;
+        return <ThirdStep handleNextStep={nextStep} />;
+      case "4":
+        return <FourthStep handleNextStep={nextStep} />;
+      case "5":
+        return <FifthStep handleNextStep={nextStep} />;
       default:
         return null;
     }
   }, [stepId]);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-full">
       <QuizNavbar />
       {dynamicStep}
     </main>
