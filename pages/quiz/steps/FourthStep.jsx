@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { quizVariants } from "@/helpers/utils";
-import { storage, STORAGE_STATE } from "@/helpers/utils";
+import { storage } from "@/helpers/utils";
+import { STORAGE_STATE, quizVariants } from "@/helpers/constants";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
@@ -21,7 +21,7 @@ const FourthStep = ({ handleNextStep }) => {
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-between items-center">
+    <div className="min-h-[85%] flex flex-col justify-between items-between">
       <div>
         <div className="text-center mb-6">
           <div className="text-3xl font-semibold mb-6">What do you hate the most in a book?</div>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Card from "@/components/ui/Card";
 import { useRouter } from "next/router";
-import { storage, STORAGE_STATE } from "@/helpers/utils";
-import { quizVariants } from "@/helpers/utils";
+import { storage } from "@/helpers/utils";
+import { quizVariants, STORAGE_STATE } from "@/helpers/constants";
 
 const FirstStep = ({ handleNextStep }) => {
   const router = useRouter();

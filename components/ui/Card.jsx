@@ -11,12 +11,10 @@ const Card = (props) => {
     selected,
     withCheckbox = false,
     selectWithDelay = true,
-    cardCount,
+    count,
   } = props;
 
   const [isSelected, setIsSelected] = useState(false);
-
-  console.log(cardCount + 1, label);
 
   const handleSelect = () => {
     setIsSelected(true);
@@ -49,10 +47,12 @@ const Card = (props) => {
     customClass
   );
 
+  const labelClassNames = classNames({ "text-xs": emoji });
+
   return (
     <div onClick={handleClick} className={cardClassNames}>
-      {emoji && <div className="text-5xl mb-3">{emoji}</div>}
-      <span>{label}</span>
+      {emoji && <div className="text-2xl ">{emoji}</div>}
+      <span className={labelClassNames}>{label}</span>
       {withCheckbox && (
         <Checkbox customClass="mb-3" selected={isSelected} onCheckboxChange={handleCheckboxChange} />
       )}

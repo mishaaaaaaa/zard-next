@@ -1,6 +1,6 @@
-import { quizVariants } from "@/helpers/utils";
 import { useRouter } from "next/router";
-import { storage, STORAGE_STATE } from "@/helpers/utils";
+import { storage } from "@/helpers/utils";
+import { quizVariants, STORAGE_STATE } from "@/helpers/constants";
 import Card from "@/components/ui/Card";
 
 const SecondStep = () => {

@@ -1,19 +1,26 @@
 import classNames from "classnames";
+import { useEffect, useState } from "react";
 
 const Button = (props) => {
-  const { children, onClick, customClass, disabled = false } = props;
+  const { children, onClick, customClass, disabled } = props;
+
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    setIsDisabled(disabled);
+  }, [disabled]);
 
   const btnClassNames = classNames(
     "w-full text-center py-4 rounded-3xl",
     {
-      "bg-[#E4229C]": !disabled,
-      "bg-[#6E0D58] text-gray-400 cursor-not-allowed": disabled,
+      "bg-[#E4229C]": !isDisabled,
+      "bg-[#6E0D58] text-gray-400 cursor-not-allowed": isDisabled,
     },
     customClass
   );
 
   return (
-    <button className={btnClassNames} onClick={onClick} disabled={disabled}>
+    <button className={btnClassNames} onClick={onClick} disabled={isDisabled}>
       {children}
     </button>
   );

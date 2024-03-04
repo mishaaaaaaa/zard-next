@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ProgressBar from "@/components/modules/ProgresBar";
-import { totalQuizSteps } from "@/helpers/utils";
+import { totalQuizSteps } from "@/helpers/constants";
 import { arrowBack } from "@/public/icons";
 
 const QuizNavbar = () => {

@@ -3,6 +3,7 @@ export const STORAGE_STATE = {
   GENDER: "GENDER",
   AGE: "AGE",
   HATE_LIST: "HATE_LIST",
+  FAV_LIST: "FAV_LIST",
 };
 
 export const totalQuizSteps = 5;

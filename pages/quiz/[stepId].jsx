@@ -36,10 +36,10 @@ const StepAddEdit = () => {
   }, [stepId]);
 
   return (
-    <main className="min-h-full">
+    <div className="min-w-full">
       <QuizNavbar />
       {dynamicStep}
-    </main>
+    </div>
   );
 };
 
