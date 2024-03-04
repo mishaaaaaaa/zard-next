@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 
-function CircularProgressBar({ sqSize = 200, strokeWidth = 10 }) {
+function CircularProgressBar(props) {
+  const { sqSize = 300, strokeWidth = 15, customClass, afterAction } = props;
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -10,18 +11,23 @@ function CircularProgressBar({ sqSize = 200, strokeWidth = 10 }) {
       const elapsedTime = Date.now() - startTime;
       const percentage = Math.min((elapsedTime / 5000) * 100, 100); // Limit progress to 100%
       setProgress(percentage);
-      if (elapsedTime >= 5000) clearInterval(interval); // Stop the interval after 5 seconds
+      if (elapsedTime >= 5000) {
+        clearInterval(interval);
+        afterAction();
+      } // Stop the interval after 5 seconds
     }, 10);
 
     return () => clearInterval(interval);
   }, []);
+
+  // useEffect(() => {}, []);
 
   const radius = (sqSize - strokeWidth) / 2;
   const dashArray = radius * Math.PI * 2;
   const dashOffset = dashArray - (dashArray * progress) / 100;
 
   return (
-    <svg width={sqSize} height={sqSize} viewBox={`0 0 ${sqSize} ${sqSize}`}>
+    <svg width={sqSize} height={sqSize} viewBox={`0 0 ${sqSize} ${sqSize}`} className={customClass}>
       <circle
         className={styles.circleBackground}
         cx={sqSize / 2}

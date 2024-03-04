@@ -6,7 +6,7 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      router.push("/quiz");
+      router.push("/quiz/1");
     }
   }, [router]);
 
