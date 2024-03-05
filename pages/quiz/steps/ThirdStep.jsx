@@ -1,16 +1,24 @@
 import { useRouter } from "next/router";
+import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
-import { quizVariants, STORAGE_STATE } from "@/helpers/constants";
+import { STORAGE_STATE } from "@/helpers/constants";
 import Card from "@/components/ui/Card";
 
-const ThirdStep = () => {
+const ThirdStep = ({ handleNextStep }) => {
   const router = useRouter();
+  const { quiz } = useQuiz();
+  const currentStep = quiz.thirdStep;
+  const storageItem = storage.getItem(STORAGE_STATE.AGE);
 
   const handleSelect = (age) => {
-    storage.setItem(STORAGE_STATE.AGE, age);
-    router.replace("/quiz/4");
+    storage.setItem(STORAGE_STATE.AGE, {
+      order: router.query.stepId,
+      title: currentStep.title.value,
+      type: currentStep.selectType,
+      answer: age,
+    });
+    handleNextStep();
   };
-
   return (
     <div>
       <div className="text-center mb-6">
@@ -18,12 +26,12 @@ const ThirdStep = () => {
       </div>
 
       <div className="grid gap-y-3 mb-5">
-        {quizVariants.thirdStep.map((el, i) => (
+        {currentStep.variants.map((el, i) => (
           <Card
-            onSelect={() => handleSelect(el)}
-            label={el}
+            onSelect={() => handleSelect(el.value)}
+            label={el.label}
             key={i}
-            selected={storage.getItem(STORAGE_STATE.AGE) === el}
+            selected={storageItem && storageItem.answer === el.value}
           />
         ))}
       </div>

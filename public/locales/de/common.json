@@ -1,3 +1,12 @@
 {
-  "quiz": { "test": "Deuchland" }
+  "secondStep": {
+    "title": "Mit welchem ​​Geschlecht identifizierst du dich?",
+    "subtitle": "Bitte teilen Sie uns mit, wie Sie sich identifizieren",
+    "labelMale": "Männlich",
+    "labelFemale": "Weiblich",
+    "labelOther": "Andere"
+  },
+  "thirdStep": {
+    "title": ""
+  }
 }

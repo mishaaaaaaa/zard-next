@@ -1,33 +1,41 @@
 import { useRouter } from "next/router";
+import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
-import { quizVariants, STORAGE_STATE } from "@/helpers/constants";
+import { STORAGE_STATE } from "@/helpers/constants";
 import Card from "@/components/ui/Card";
 
-const SecondStep = () => {
+const SecondStep = ({ handleNextStep }) => {
   const router = useRouter();
+  const { quiz } = useQuiz();
+  const currentStep = quiz.secondStep;
+  const storageItem = storage.getItem(STORAGE_STATE.GENDER);
 
   const handleSelect = (gender) => {
-    storage.setItem(STORAGE_STATE.GENDER, gender);
-    router.replace("/quiz/3");
+    storage.setItem(STORAGE_STATE.GENDER, {
+      order: router.query.stepId,
+      title: currentStep.title.value,
+      type: currentStep.selectType,
+      answer: gender,
+    });
+    handleNextStep();
   };
 
   return (
     <div>
       <div className="text-center mb-6">
-        <div className="text-3xl font-semibold mb-6">What gender do you identify with?</div>
-        <div className="mb-6 text-zinc-400">Please share how do you identify yourself</div>
+        <div className="text-3xl font-semibold mb-6">{currentStep.title.label}</div>
+        <div className="mb-6 text-zinc-400">{currentStep.subtitle}</div>
       </div>
-      {/* <Link href="/quiz/2">Link to second page</Link> */}
 
       <div className="grid grid-cols-3 gap-4">
-        {quizVariants.secondStep.map((el, i) => (
+        {currentStep.variants.map((el, i) => (
           <Card
-            onSelect={() => handleSelect(el.label)}
+            onSelect={() => handleSelect(el.value)}
             label={el.label}
             emoji={el.emoji}
             key={i}
             customClass="text-center pt-6 pb-6"
-            selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
+            selected={storageItem && storageItem.answer === el.value}
           />
         ))}
       </div>

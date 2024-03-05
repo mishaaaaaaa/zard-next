@@ -9,6 +9,8 @@ import FourthStep from "./steps/FourthStep";
 import QuizNavbar from "@/components/ui/QuizNavbar";
 import FifthStep from "./steps/FifthStep";
 
+// React.lazy(() => import("./editor"));
+
 const StepAddEdit = () => {
   const { t } = useTranslation();
   const router = useRouter();

@@ -1,3 +1,13 @@
 {
-  "quiz": { "test": "English" }
+  "secondStep": {
+    "title": "What gender do you identify with?",
+    "subtitle": "Please share how do you identify yourself",
+    "labelMale": "Male",
+    "labelFemale": "Female",
+    "labelOther": "Other"
+  },
+  "thirdStep": {
+    "title": "What is your age?",
+    "years": "years"
+  }
 }
