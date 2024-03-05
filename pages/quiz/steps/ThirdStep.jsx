@@ -22,7 +22,7 @@ const ThirdStep = ({ handleNextStep }) => {
   return (
     <div>
       <div className="text-center mb-6">
-        <div className="text-3xl font-semibold mb-6">What is your age?</div>
+        <div className="text-3xl font-semibold mb-6">{currentStep.title.label}</div>
       </div>
 
       <div className="grid gap-y-3 mb-5">

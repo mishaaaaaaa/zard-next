@@ -1,16 +1,29 @@
 import { useTranslation } from "react-i18next";
+import { useLayoutEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { CSVLink } from "react-csv";
 import Button from "@/components/ui/Button";
 import circle_check from "../public/images/circle_check.png";
 import { downloadIcon } from "@/public/icons";
-import { CSVLink } from "react-csv";
+import { STORAGE_STATE } from "@/helpers/constants";
+import { storage } from "@/helpers/utils";
 
 const Email = () => {
   const { t } = useTranslation();
+  const router = useRouter();
+  const [answers, setAnswers] = useState([]);
 
-  const handleDownload = () => {};
+  console.log(answers);
 
-  const handleRetakeQuiz = () => {};
+  // useLayoutEffect is used prevent data leaks due to render issues
+  useLayoutEffect(() => {
+    for (let key in STORAGE_STATE) {
+      if (STORAGE_STATE.hasOwnProperty(key)) {
+        setAnswers((state) => [...state, storage.getItem(key)]);
+      }
+    }
+  }, []);
 
   const headers = [
     { label: "Order", key: "order" },
@@ -19,33 +32,38 @@ const Email = () => {
     { label: "answer", key: "answer" },
   ];
 
-  const data = [
-    { firstname: "Misha", lastname: "Tomi", email: "ah@smthing.co.com" },
-    { firstname: "Masha", lastname: "Labes", email: "rl@smthing.co.com" },
-    { firstname: "Bodya", lastname: "Min l3b", email: "ymin@cocococo.com" },
-  ];
+  const handleRetakeQuiz = () => {
+    for (let key in STORAGE_STATE) {
+      if (STORAGE_STATE.hasOwnProperty(key)) {
+        storage.removeItem(key);
+      }
+    }
+    router.replace("/quiz/1");
+  };
 
   return (
     <div className="flex flex-col justify-between items-center w-full">
       <div className="mt-24">
         <div className="text-center">
-          <div className="text-3xl font-semibold mb-6">Thank you</div>
-          <div className="mb-6 text-zinc-400">for supporting us and passing quiz</div>
+          <div className="text-3xl font-semibold mb-6">{t("finalStep.title")}</div>
+          <div className="mb-6 text-zinc-400">{t("finalStep.subtitle")}</div>
         </div>
         <div className="flex justify-center mt-10">
           <img src={circle_check.src} width={150} alt="Complete image" />
         </div>
       </div>
       <div className="w-full">
-        <CSVLink data={data} headers={headers} filename={"answers.csv"}>
-          Download me
-        </CSVLink>
-        ;
-        <div onClick={handleDownload} className="flex gap-x-3 justify-center mb-7">
+        <CSVLink
+          data={answers}
+          headers={headers}
+          filename={"answers.csv"}
+          className="flex gap-x-3 justify-center mb-7"
+        >
           <span>{downloadIcon}</span>
-          <span>Download my answers</span>
-        </div>
-        <Button onClick={handleRetakeQuiz}>Retake quiz</Button>
+          <span>{t("finalStep.dowloadAnswersBtn")}</span>
+        </CSVLink>
+
+        <Button onClick={handleRetakeQuiz}>{t("finalStep.retakeBtn")}</Button>
       </div>
     </div>
   );

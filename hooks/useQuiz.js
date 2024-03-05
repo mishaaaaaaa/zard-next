@@ -47,26 +47,56 @@ const useQuiz = () => {
     },
     thirdStep: {
       title: {
-        label: t("secondStep.title"),
-        value: "What gender do you identify with?",
+        label: t("thirdStep.title"),
+        value: "What is your age?",
       },
+      selectType: selectTypes.single,
       variants: [
         { label: `18-29 ${t("thirdStep.years")}`, value: "18-29 years" },
-        { label: `30-39 ${t("thirdStep.years")}`, value: "30-39  years" },
+        { label: `30-39 ${t("thirdStep.years")}`, value: "30-39 years" },
         { label: `40-49 ${t("thirdStep.years")}`, value: "40-49 years" },
         { label: `50+ ${t("thirdStep.years")}`, value: "50+" },
       ],
     },
-    fourthStep: ["Lack of logic", "A slow speed", "Lack of humor", "Way too generic ending"],
-    fifthStep: [
-      { label: "Werewolf", emoji: "🐺" },
-      { label: "Action", emoji: "💃" },
-      { label: "Royal Obsession", emoji: "👑" },
-      { label: "Billionaire", emoji: "🤑" },
-      { label: "Romance", emoji: "🥰" },
-      { label: "Young Adult", emoji: "💁‍♀️" },
-      { label: "Bad Boy", emoji: "🤠 " },
-    ],
+    fourthStep: {
+      title: {
+        label: t("fourthStep.title"),
+        value: "What do you hate the most in a book?",
+      },
+      selectType: selectTypes.multi,
+      variants: [
+        { label: t("fourthStep.labelLackLogic"), value: "Lack of logic" },
+        { label: t("fourthStep.labelSlowSpeed"), value: "A slow speed" },
+        { label: t("fourthStep.labelLackHumor"), value: "Lack of humor" },
+        { label: t("fourthStep.labelGenericEnding"), value: "Way too generic ending" },
+      ],
+    },
+    fifthStep: {
+      title: {
+        label: t("fifthStep.title"),
+        value: "What are your favorite topics?",
+      },
+      subtitle: t("fifthStep.subtitle"),
+      selectType: selectTypes.buble,
+      variants: [
+        { value: "Werewolf", label: t("fifthStep.werewolf"), emoji: "🐺" },
+        { value: "Action", label: t("fifthStep.action"), emoji: "💃" },
+        { value: "Royal Obsession", label: t("fifthStep.royalObsession"), emoji: "👑" },
+        { value: "Billionaire", label: t("fifthStep.billionaire"), emoji: "🤑" },
+        { value: "Romance", label: t("fifthStep.romance"), emoji: "🥰" },
+        { value: "Young Adult", label: t("fifthStep.youngAdult"), emoji: "💁‍♀️" },
+        { value: "Bad Boy", label: t("fifthStep.badBoy"), emoji: "🤠 " },
+      ],
+    },
+    emailStep: {
+      title: {
+        label: t("emailSubmit.title"),
+        value: "Email",
+      },
+      subtitle: t("emailSubmit.subtitle"),
+      selectType: selectTypes.email,
+      order: "6",
+    },
   };
   return { quiz };
 };

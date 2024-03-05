@@ -4,6 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import CircleProgress from "@/components/modules/CircleProgress";
 
 const Analyzing = () => {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const actionAfterLoading = () => {
@@ -13,9 +14,9 @@ const Analyzing = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col justify-center items-center">
       <CircleProgress customClass="mb-5" afterAction={actionAfterLoading} />
-      <span className="text-xl">Finding collections for you...</span>
+      <span className="text-xl">{t("analyzing.title")}</span>
     </div>
   );
 };

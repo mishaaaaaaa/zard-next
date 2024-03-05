@@ -1,12 +1,19 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import useQuiz from "@/hooks/useQuiz";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { validateEmail } from "@/helpers/utils";
+import { storage } from "@/helpers/utils";
+import { STORAGE_STATE } from "@/helpers/constants";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
 const Email = () => {
   const { t } = useTranslation();
+  const router = useRouter();
+  const { quiz } = useQuiz();
+  const currentStep = quiz.emailStep;
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -20,12 +27,23 @@ const Email = () => {
     }
   };
 
+  const handleSubmit = () => {
+    storage.setItem(STORAGE_STATE.EMAIL, {
+      order: currentStep.order,
+      title: currentStep.title.value,
+      type: currentStep.selectType,
+      answer: email,
+    });
+
+    router.replace("/answers");
+  };
+
   return (
     <div className="flex flex-col justify-between items-center">
-      <div className="mt-24">
+      <div className="mt-32">
         <div className="text-center">
-          <div className="text-3xl font-semibold mb-6">Email</div>
-          <div className="mb-6 text-zinc-400">Enter your email to get full access</div>
+          <div className="text-3xl font-semibold mb-6">{t("emailSubmit.title")}</div>
+          <div className="mb-10 text-zinc-400">{t("emailSubmit.subtitle")}</div>
         </div>
         <div>
           <div>
@@ -33,14 +51,21 @@ const Email = () => {
               value={email}
               handleChange={handleChange}
               isValid={isValidEmail}
-              placeholder="your email"
-              errorMessage="Invalid email"
+              placeholder={t("emailSubmit.emailPlaceholder")}
+              errorMessage={t("emailSubmit.invalidEmail")}
             />
           </div>
-          <span>By continuing I agree with Privacy policy and Terms of use.</span>
+          <div className="mt-10">
+            <span className="text-zinc-400">{t("emailSubmit.policyAndTerms")} </span>
+            <a className="text-[#EB2F9A]">{t("emailSubmit.privacyPolicy")} </a>
+            <span className="text-zinc-400">{t("emailSubmit.and")} </span>
+            <a className="text-[#EB2F9A]">{t("emailSubmit.terms")} </a>
+          </div>
         </div>
       </div>
-      <Button disabled={!isValidEmail}>Next</Button>
+      <Button disabled={!isValidEmail} onClick={handleSubmit}>
+        Next
+      </Button>
     </div>
   );
 };

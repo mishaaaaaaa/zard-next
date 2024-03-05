@@ -9,5 +9,41 @@
   "thirdStep": {
     "title": "What is your age?",
     "years": "years"
+  },
+  "fourthStep": {
+    "labelLackLogic": "Lack of logic",
+    "labelSlowSpeed": "A slow speed",
+    "labelLackHumor": "Lack of humor",
+    "labelGenericEnding": "Way too generic ending"
+  },
+  "fifthStep": {
+    "title": "What are your favorite topics?",
+    "subtitle": "Choose up to 3 topics you like",
+    "werewolf": "Werewolf",
+    "action": "Action",
+    "royalObsession": "Royal Obsession",
+    "billionaire": "Billionaire",
+    "romance": "Romance",
+    "youngAdult": "Young Adult",
+    "badBoy": "Bad Boy"
+  },
+  "analyzing": {
+    "title": "Finding collections for you..."
+  },
+  "emailSubmit": {
+    "title": "Email",
+    "subtitle": "Enter your email to get full access",
+    "policyAndTerms": "By continuing I agree with",
+    "privacyPolicy": "Privacy policy",
+    "terms": "Terms of use.",
+    "and": "and",
+    "emailPlaceholder": "Your email",
+    "invalidEmail": "Invalid email"
+  },
+  "finalStep": {
+    "title": "Thank you",
+    "subtitle": "for supporting us and passing quiz",
+    "dowloadAnswersBtn": "Download my answers",
+    "retakeBtn": "Retake quiz"
   }
 }

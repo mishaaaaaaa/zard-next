@@ -19,12 +19,3 @@ export const storage = {
 };
 
 export const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-// const changeLanguageAction = (lang) => {
-//     const langCode = lang === "uk" ? "ua" : lang;
-//     if (getToken) {
-//       dispatch(updateUserData({ lang: langCode }));
-//     }
-//     router.push({ pathname, query }, asPath, { locale: lang });
-//     localStorage.setItem(LOCAL_STORAGE_LANGUAGE, lang);
-//   };

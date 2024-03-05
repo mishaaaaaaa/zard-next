@@ -1,47 +1,56 @@
-import { useEffect } from "react";
-import { quizVariants, STORAGE_STATE } from "@/helpers/constants";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import useQuiz from "@/hooks/useQuiz";
+import { STORAGE_STATE } from "@/helpers/constants";
+
 import { storage } from "@/helpers/utils";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import { useState } from "react";
 
 const FifthStep = () => {
   const router = useRouter();
+  const { quiz } = useQuiz();
+  const currentStep = quiz.fifthStep;
+
   const storageFavList = storage.getItem(STORAGE_STATE.FAV_LIST);
-  const [favItems, setFavItems] = useState(() => (storageFavList ? storageFavList : []));
+  const [favItems, setFavItems] = useState(() => (storageFavList ? storageFavList.answer : []));
 
   useEffect(() => {
-    storage.setItem(STORAGE_STATE.FAV_LIST, favItems);
+    if (favItems.length > 0) {
+      storage.setItem(STORAGE_STATE.FAV_LIST, {
+        order: router.query.stepId,
+        title: currentStep.title.value,
+        type: currentStep.selectType,
+        answer: favItems,
+      });
+    } else {
+    }
   }, [favItems]);
 
-  const handleSelect = (favItemLabel) => {
-    const isUnSelectAction = favItems.some((el) => el === favItemLabel);
-
+  const handleSelect = (favItem) => {
+    const isUnSelectAction = favItems.some((el) => el === favItem);
     if (isUnSelectAction) {
-      const newFavItems = favItems.filter((el) => el !== favItemLabel);
-      setFavItems(newFavItems);
-    } else setFavItems((state) => [...state, favItemLabel]);
+      setFavItems((state) => state.filter((el) => el !== favItem));
+    } else setFavItems((state) => [...state, favItem]);
   };
-  // };
 
   return (
     <div className="min-h-[85vh] flex flex-col justify-between items-center">
       <div className="text-center ">
-        <div className="text-3xl font-semibold mb-6">What are your favorite topics?</div>
-        <div className="mb-10 text-zinc-400">Choose up to 3 topics you like</div>
+        <div className="text-3xl font-semibold mb-6">{currentStep.title.label}</div>
+        <div className="mb-10 text-zinc-400">{currentStep.subtitle}</div>
 
         <div className="grid grid-cols-4 gap-y-2 gap-x-16 overflow-x-scroll">
           <>
-            {quizVariants.fifthStep.map((el, i) => (
+            {currentStep.variants.map((el, i) => (
               <Card
                 label={el.label}
                 emoji={el.emoji}
                 key={i}
                 customClass="flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]"
                 count={i}
-                selected={favItems.includes(el.label)}
-                onSelect={() => handleSelect(el.label)}
+                selected={favItems.includes(el.value)}
+                onSelect={() => handleSelect(el.value)}
                 selectWithDelay={false}
               />
             ))}
