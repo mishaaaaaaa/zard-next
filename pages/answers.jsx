@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useLayoutEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -13,8 +13,6 @@ const Email = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [answers, setAnswers] = useState([]);
-
-  console.log(answers);
 
   // useLayoutEffect is used prevent data leaks due to render issues
   useLayoutEffect(() => {

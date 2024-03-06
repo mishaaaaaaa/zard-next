@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { selectTypes } from "@/helpers/constants";
 import { langNames } from "@/helpers/constants";
 

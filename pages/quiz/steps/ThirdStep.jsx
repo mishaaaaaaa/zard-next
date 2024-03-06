@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
@@ -9,8 +10,11 @@ const ThirdStep = ({ handleNextStep }) => {
   const { quiz } = useQuiz();
   const currentStep = quiz.thirdStep;
   const storageItem = storage.getItem(STORAGE_STATE.AGE);
+  const [selectedCard, setSelectedCard] = useState(storageItem ? storageItem.answer : "");
 
   const handleSelect = (age) => {
+    setSelectedCard(age);
+
     storage.setItem(STORAGE_STATE.AGE, {
       order: router.query.stepId,
       title: currentStep.title.value,
@@ -19,6 +23,7 @@ const ThirdStep = ({ handleNextStep }) => {
     });
     handleNextStep();
   };
+
   return (
     <div>
       <div className="text-center mb-6">
@@ -31,7 +36,7 @@ const ThirdStep = ({ handleNextStep }) => {
             onSelect={() => handleSelect(el.value)}
             label={el.label}
             key={i}
-            selected={storageItem && storageItem.answer === el.value}
+            selected={selectedCard === el.value}
           />
         ))}
       </div>

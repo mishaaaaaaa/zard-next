@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import useQuiz from "@/hooks/useQuiz";

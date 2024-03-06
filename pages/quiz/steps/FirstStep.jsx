@@ -3,6 +3,7 @@ import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
 import { STORAGE_STATE, langNames } from "@/helpers/constants";
 import Card from "@/components/ui/Card";
+import { useState } from "react";
 
 const FirstStep = ({ handleNextStep }) => {
   const router = useRouter();
@@ -10,16 +11,23 @@ const FirstStep = ({ handleNextStep }) => {
   const { quiz } = useQuiz();
   const currentStep = quiz.firstStep;
   const storageItem = storage.getItem(STORAGE_STATE.I18N_LANGUAGE);
+  const [selectedCard, setSelectedCard] = useState(storageItem ? storageItem.answer : null);
 
-  const handleSelect = async (lang) => {
+  const handleSelect = async (lang, label) => {
+    setSelectedCard(label);
+
     await router.push({ pathname, query }, asPath, { locale: lang });
-    await handleNextStep();
-    storage.setItem(STORAGE_STATE.I18N_LANGUAGE, {
-      order: query.stepId,
-      title: currentStep.title.value,
-      type: currentStep.selectType,
-      answer: langNames[lang],
-    });
+
+    setTimeout(async () => {
+      await handleNextStep();
+
+      storage.setItem(STORAGE_STATE.I18N_LANGUAGE, {
+        order: query.stepId,
+        title: currentStep.title.value,
+        type: currentStep.selectType,
+        answer: langNames[lang],
+      });
+    }, 200);
   };
 
   return (
@@ -30,12 +38,13 @@ const FirstStep = ({ handleNextStep }) => {
       </div>
 
       <div className="grid gap-y-3 mb-5">
-        {currentStep.variants.map((el, i) => (
+        {currentStep.variants.map(({ code, label }, i) => (
           <Card
-            onSelect={() => handleSelect(el.code)}
-            label={el.label}
+            onSelect={() => handleSelect(code, label)}
+            label={label}
             key={i}
-            selected={storageItem && storageItem.answer === el.label}
+            selected={selectedCard === label}
+            selectWithDelay={false}
           />
         ))}
       </div>

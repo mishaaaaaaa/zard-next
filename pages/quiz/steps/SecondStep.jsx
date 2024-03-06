@@ -3,21 +3,28 @@ import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
 import { STORAGE_STATE } from "@/helpers/constants";
 import Card from "@/components/ui/Card";
+import { useEffect, useState } from "react";
 
 const SecondStep = ({ handleNextStep }) => {
   const router = useRouter();
   const { quiz } = useQuiz();
   const currentStep = quiz.secondStep;
   const storageItem = storage.getItem(STORAGE_STATE.GENDER);
+  const [selectedCard, setSelectedCard] = useState(storageItem ? storageItem.answer : "");
 
   const handleSelect = (gender) => {
+    setSelectedCard(gender);
+
     storage.setItem(STORAGE_STATE.GENDER, {
       order: router.query.stepId,
       title: currentStep.title.value,
       type: currentStep.selectType,
       answer: gender,
     });
-    handleNextStep();
+
+    setTimeout(() => {
+      handleNextStep();
+    }, 200);
   };
 
   return (
@@ -35,7 +42,7 @@ const SecondStep = ({ handleNextStep }) => {
             emoji={el.emoji}
             key={i}
             customClass="text-center pt-6 pb-6"
-            selected={storageItem && storageItem.answer === el.value}
+            selected={selectedCard === el.value}
           />
         ))}
       </div>

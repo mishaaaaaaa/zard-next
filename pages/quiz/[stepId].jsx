@@ -1,53 +1,43 @@
 import { useMemo } from "react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import QuizNavbar from "@/components/ui/QuizNavbar";
 import FirstStep from "./steps/FirstStep";
 import SecondStep from "./steps/SecondStep";
 import ThirdStep from "./steps/ThirdStep";
 import FourthStep from "./steps/FourthStep";
-import QuizNavbar from "@/components/ui/QuizNavbar";
 import FifthStep from "./steps/FifthStep";
 
-// React.lazy(() => import("./editor"));
+const components = {
+  1: FirstStep,
+  2: SecondStep,
+  3: ThirdStep,
+  4: FourthStep,
+  5: FifthStep,
+};
 
-const StepAddEdit = () => {
-  const { t } = useTranslation();
+const StepAddEdit = ({ stepId }) => {
   const router = useRouter();
-  const { stepId } = router.query;
 
   const nextStep = () => {
     router.replace(`/quiz/${parseInt(stepId) + 1}`);
   };
 
-  const dynamicStep = useMemo(() => {
-    switch (stepId) {
-      case "1":
-        return <FirstStep handleNextStep={nextStep} />;
-      case "2":
-        return <SecondStep handleNextStep={nextStep} />;
-      case "3":
-        return <ThirdStep handleNextStep={nextStep} />;
-      case "4":
-        return <FourthStep handleNextStep={nextStep} />;
-      case "5":
-        return <FifthStep handleNextStep={nextStep} />;
-      default:
-        return null;
-    }
+  const DynamicStep = useMemo(() => {
+    const Component = components[stepId];
+    return Component ? <Component handleNextStep={nextStep} /> : null;
   }, [stepId]);
 
   return (
     <div className="min-w-full">
       <QuizNavbar />
-      {dynamicStep}
+      {DynamicStep}
     </div>
   );
 };
 
 export async function getServerSideProps(context) {
-  const stepId = context.query.stepId;
-
+  const { stepId } = context.query;
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ["common"])),
