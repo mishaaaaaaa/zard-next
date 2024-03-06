@@ -23,3 +23,7 @@ export const selectTypes = {
 };
 
 export const totalQuizSteps = 5;
+
+export const megaSecretPrivacyLink = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+export const megaSecretTermsLink = "https://www.youtube.com/watch?v=hhuEsj93Q1U";

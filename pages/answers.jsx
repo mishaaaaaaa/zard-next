@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { CSVLink } from "react-csv";
@@ -14,8 +14,7 @@ const Email = () => {
   const router = useRouter();
   const [answers, setAnswers] = useState([]);
 
-  // useLayoutEffect is used prevent data leaks due to render issues
-  useLayoutEffect(() => {
+  useEffect(() => {
     for (let key in STORAGE_STATE) {
       if (STORAGE_STATE.hasOwnProperty(key)) {
         setAnswers((state) => [...state, storage.getItem(key)]);
@@ -50,7 +49,7 @@ const Email = () => {
           <img src={circle_check.src} width={150} alt="Complete image" />
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full text-center">
         <CSVLink
           data={answers}
           headers={headers}

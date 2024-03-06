@@ -11,7 +11,7 @@ const Button = (props) => {
   }, [disabled]);
 
   const btnClassNames = classNames(
-    "w-full md:w-auto px-48  text-center py-4 rounded-3xl hover:cursor-pointer",
+    "w-full md:w-auto md:px-48  text-center py-4 rounded-3xl hover:cursor-pointer ",
     {
       "bg-[#E4229C]": !isDisabled,
       "bg-[#6E0D58] text-gray-400 cursor-not-allowed": isDisabled,
@@ -27,5 +27,3 @@ const Button = (props) => {
 };
 
 export default Button;
-
-// расписать почему использую фолдеры для компонентов

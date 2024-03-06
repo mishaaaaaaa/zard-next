@@ -48,7 +48,7 @@ const FifthStep = () => {
                 label={el.label}
                 emoji={el.emoji}
                 key={i}
-                customClass="flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]"
+                customClass="flex flex-col justify-center text-center  !rounded-full w-[100px] h-[100px]"
                 count={i}
                 selected={favItems.includes(el.value)}
                 onSelect={() => handleSelect(el.value)}

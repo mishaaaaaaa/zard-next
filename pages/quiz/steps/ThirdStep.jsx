@@ -21,7 +21,9 @@ const ThirdStep = ({ handleNextStep }) => {
       type: currentStep.selectType,
       answer: age,
     });
-    handleNextStep();
+    setTimeout(() => {
+      handleNextStep();
+    }, 200);
   };
 
   return (
