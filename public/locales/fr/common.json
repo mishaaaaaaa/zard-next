@@ -1,3 +1,49 @@
 {
-  "quiz": { "test": "France" }
+  "secondStep": {
+    "title": "Avec quel genre vous identifiez-vous?",
+    "subtitle": "Veuillez partager comment vous vous identifiez",
+    "labelMale": "Masculin",
+    "labelFemale": "Féminin",
+    "labelOther": "Autre"
+  },
+  "thirdStep": {
+    "title": "Quel âge avez-vous?",
+    "years": "ans"
+  },
+  "fourthStep": {
+    "labelLackLogic": "Manque de logique",
+    "labelSlowSpeed": "Vitesse lente",
+    "labelLackHumor": "Manque d'humour",
+    "labelGenericEnding": "Fin trop générique"
+  },
+  "fifthStep": {
+    "title": "Quels sont vos sujets préférés?",
+    "subtitle": "Choisissez jusqu'à 3 sujets que vous aimez",
+    "werewolf": "Loup-garou",
+    "action": "Action",
+    "royalObsession": "Obsession royale",
+    "billionaire": "Milliardaire",
+    "romance": "Romance",
+    "youngAdult": "Jeune adulte",
+    "badBoy": "Mauvais garçon"
+  },
+  "analyzing": {
+    "title": "Recherche de collections pour vous..."
+  },
+  "emailSubmit": {
+    "title": "Email",
+    "subtitle": "Entrez votre email pour accéder complètement",
+    "policyAndTerms": "En continuant, j'accepte",
+    "privacyPolicy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation.",
+    "and": "et",
+    "emailPlaceholder": "Votre email",
+    "invalidEmail": "Email invalide"
+  },
+  "finalStep": {
+    "title": "Merci",
+    "subtitle": "pour votre soutien et avoir passé le questionnaire",
+    "dowloadAnswersBtn": "Télécharger mes réponses",
+    "retakeBtn": "Repasser le questionnaire"
+  }
 }

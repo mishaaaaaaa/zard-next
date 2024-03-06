@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
 import { STORAGE_STATE } from "@/helpers/constants";
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/Card/Card";
 
 const ThirdStep = ({ handleNextStep }) => {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import Checkbox from "./Checkbox";
+import Checkbox from "../Checkbox";
 
 const Card = (props) => {
   const {

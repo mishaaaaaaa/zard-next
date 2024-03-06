@@ -1,5 +1,3 @@
-import { useTranslation } from "react-i18next";
-
 export const STORAGE_STATE = {
   I18N_LANGUAGE: "I18N_LANGUAGE",
   GENDER: "GENDER",

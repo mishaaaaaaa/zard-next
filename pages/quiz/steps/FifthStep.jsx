@@ -4,7 +4,7 @@ import useQuiz from "@/hooks/useQuiz";
 import { STORAGE_STATE } from "@/helpers/constants";
 
 import { storage } from "@/helpers/utils";
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/Card/Card";
 import Button from "@/components/ui/Button";
 
 const FifthStep = () => {

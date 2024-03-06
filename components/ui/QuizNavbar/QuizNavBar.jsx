@@ -32,12 +32,11 @@ const QuizNavbar = () => {
       </div>
 
       <ProgressBar
-        visualParts={[
-          {
-            step: currentStep,
-            color: "#E4229C",
-          },
-        ]}
+        progressInfo={{
+          step: currentStep,
+          color: "#E4229C",
+        }}
+        totalSteps={totalQuizSteps}
       />
     </div>
   );

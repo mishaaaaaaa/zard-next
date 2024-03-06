@@ -14,13 +14,11 @@ function CircularProgressBar(props) {
       if (elapsedTime >= 5000) {
         clearInterval(interval);
         afterAction();
-      } // Stop the interval after 5 seconds
+      }
     }, 10);
 
     return () => clearInterval(interval);
   }, []);
-
-  // useEffect(() => {}, []);
 
   const radius = (sqSize - strokeWidth) / 2;
   const dashArray = radius * Math.PI * 2;
