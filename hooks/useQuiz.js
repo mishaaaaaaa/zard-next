@@ -60,7 +60,12 @@ const useQuiz = () => {
     },
     fourthStep: {
       title: {
-        label: t("fourthStep.title"),
+        label: (
+          <span>
+            {t("fourthStep.titleFirstPart")} <span className="text-[#EB2F9A]">{t("fourthStep.hate")}</span>{" "}
+            {t("fourthStep.titleSecondPart")}
+          </span>
+        ),
         value: "What do you hate the most in a book?",
       },
       selectType: selectTypes.multi,

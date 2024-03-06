@@ -25,12 +25,12 @@ const ThirdStep = ({ handleNextStep }) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <div className="text-center mb-6">
         <div className="text-3xl font-semibold mb-6">{currentStep.title.label}</div>
       </div>
 
-      <div className="grid gap-y-3 mb-5">
+      <div className="grid gap-y-3 w-full  lg:grid-cols-2 lg:gap-x-3 mb-5 lg:w-3/4">
         {currentStep.variants.map((el, i) => (
           <Card
             onSelect={() => handleSelect(el.value)}

@@ -1,12 +1,14 @@
+import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { storage } from "@/helpers/utils";
-import { STORAGE_STATE, quizVariants } from "@/helpers/constants";
+import { STORAGE_STATE } from "@/helpers/constants";
 import useQuiz from "@/hooks/useQuiz";
 import Card from "@/components/ui/Card/Card";
 import Button from "@/components/ui/Button";
 
 const FourthStep = ({ handleNextStep }) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const { quiz } = useQuiz();
   const currentStep = quiz.fourthStep;
@@ -34,13 +36,13 @@ const FourthStep = ({ handleNextStep }) => {
   };
 
   return (
-    <div className="min-h-[85%] flex flex-col justify-between items-between">
-      <div>
+    <div className="min-h-[85%] flex flex-col justify-between items-center">
+      <div className="w-full flex flex-col justify-between items-center">
         <div className="text-center mb-6">
           <div className="text-3xl font-semibold mb-6">{currentStep.title.label}</div>
         </div>
 
-        <div className="grid gap-y-3 mb-5">
+        <div className="grid gap-y-3  w-full lg:grid-cols-2 lg:gap-x-3 mb-5 lg:w-3/4">
           {currentStep.variants.map((el, i) => (
             <Card
               onSelect={() => handleSelect(el.value)}
@@ -55,7 +57,7 @@ const FourthStep = ({ handleNextStep }) => {
       </div>
 
       <Button onClick={handleNextStep} disabled={hateItems.length === 0}>
-        Next
+        {t("btn.nextLabel")}
       </Button>
     </div>
   );

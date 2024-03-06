@@ -23,7 +23,10 @@ const QuizNavbar = () => {
   return (
     <div className="text-center font-semibold">
       <div className="flex items-center justify-between">
-        <div onClick={handleNavBack}> {stepId >= 2 && arrowBack}</div>
+        <div onClick={handleNavBack} className="hover:cursor-pointer">
+          {" "}
+          {stepId >= 2 && arrowBack}
+        </div>
         <div>
           <span className="text-[#E4229C] self-center">{currentStep}</span>
           <span>/{totalQuizSteps}</span>

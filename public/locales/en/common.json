@@ -11,6 +11,9 @@
     "years": "years"
   },
   "fourthStep": {
+    "titleFirstPart": "What do you",
+    "hate": "hate",
+    "titleSecondPart": "the most in a book?",
     "labelLackLogic": "Lack of logic",
     "labelSlowSpeed": "A slow speed",
     "labelLackHumor": "Lack of humor",
@@ -45,5 +48,8 @@
     "subtitle": "for supporting us and passing quiz",
     "dowloadAnswersBtn": "Download my answers",
     "retakeBtn": "Retake quiz"
+  },
+  "btn": {
+    "nextLabel": "Next"
   }
 }

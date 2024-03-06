@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 
 function CircularProgressBar(props) {
-  const { sqSize = 300, strokeWidth = 15, customClass, afterAction } = props;
+  const { sqSize = 300, strokeWidth = 15, loadingTime = 5000, customClass, afterAction } = props;
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const startTime = Date.now();
     const interval = setInterval(() => {
       const elapsedTime = Date.now() - startTime;
-      const percentage = Math.min((elapsedTime / 5000) * 100, 100); // Limit progress to 100%
+      const percentage = Math.min((elapsedTime / loadingTime) * 100, 100); // Limit progress to 100%
       setProgress(percentage);
-      if (elapsedTime >= 5000) {
+      if (elapsedTime >= loadingTime) {
         clearInterval(interval);
         afterAction();
       }

@@ -1,13 +1,14 @@
+import { useTranslation } from "next-i18next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useQuiz from "@/hooks/useQuiz";
 import { STORAGE_STATE } from "@/helpers/constants";
-
 import { storage } from "@/helpers/utils";
 import Card from "@/components/ui/Card/Card";
 import Button from "@/components/ui/Button";
 
 const FifthStep = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const { quiz } = useQuiz();
   const currentStep = quiz.fifthStep;
@@ -40,7 +41,7 @@ const FifthStep = () => {
         <div className="text-3xl font-semibold mb-6">{currentStep.title.label}</div>
         <div className="mb-10 text-zinc-400">{currentStep.subtitle}</div>
 
-        <div className="grid grid-cols-4 gap-y-2 gap-x-16 overflow-x-scroll">
+        <div className="grid grid-cols-4 gap-y-2 gap-x-16  overflow-x-scroll md:gap-y-4 md:gap-x-2 md:overflow-visible">
           <>
             {currentStep.variants.map((el, i) => (
               <Card
@@ -52,6 +53,8 @@ const FifthStep = () => {
                 selected={favItems.includes(el.value)}
                 onSelect={() => handleSelect(el.value)}
                 selectWithDelay={false}
+                limit={3}
+                cardList={favItems}
               />
             ))}
           </>
@@ -59,79 +62,10 @@ const FifthStep = () => {
       </div>
 
       <Button onClick={() => router.replace("/analyzing")} disabled={favItems.length === 0}>
-        Next
+        {t("btn.nextLabel")}
       </Button>
-
-      {/* <div className="ml-5 flex ">
-        <div className="mt-1 mr-3">
-          <div>
-            <Card
-              label={quizVariants.fifthStep[0].label}
-              emoji={quizVariants.fifthStep[0].emoji}
-              customClass={`mb-3 flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]`}
-              // selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
-            />
-          </div>
-          <div>
-            <Card
-              label={quizVariants.fifthStep[1].label}
-              emoji={quizVariants.fifthStep[1].emoji}
-              customClass={`flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]`}
-              // selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
-            />
-          </div>
-        </div>
-        <div>
-          <div className="mt-6 mr-3">
-            <Card
-              label={quizVariants.fifthStep[2].label}
-              emoji={quizVariants.fifthStep[2].emoji}
-              customClass={`mb-3 flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]`}
-              // selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
-            />
-          </div>
-          <div>
-            <Card
-              label={quizVariants.fifthStep[3].label}
-              emoji={quizVariants.fifthStep[3].emoji}
-              customClass={`mb-3 flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]`}
-              // selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
-            />
-          </div>
-        </div>
-        <div className="mr-3">
-          <div>
-            <Card
-              label={quizVariants.fifthStep[4].label}
-              emoji={quizVariants.fifthStep[4].emoji}
-              customClass={`mb-3 flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]`}
-              // selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
-            />
-          </div>
-          <div>
-            <Card
-              label={quizVariants.fifthStep[5].label}
-              emoji={quizVariants.fifthStep[5].emoji}
-              customClass={`mb-3 flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]`}
-              // selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
-            />
-          </div>
-        </div>
-        <div>
-          <div>
-            <Card
-              label={quizVariants.fifthStep[6].label}
-              emoji={quizVariants.fifthStep[6].emoji}
-              customClass={`mb-3 flex flex-col justify-center text-center  rounded-full w-[90px] h-[90px]`}
-              // selected={storage.getItem(STORAGE_STATE.GENDER) === el.label}
-            />
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
 
 export default FifthStep;
-
-/* Section / 4 */
