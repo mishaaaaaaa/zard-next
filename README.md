@@ -1,14 +1,14 @@
 ## Zard-Next
 
-# Description:
+### Description:
 
 Zard-Next is a React Next.js project crafted for an enjoyable experience of taking a brief quiz with a user-friendly and adaptable interface. It employs Next.js and Redux for enhanced functionality, with the potential to seamlessly integrate with external APIs. As for now LocalStorage is used as a data storage. To launch the application, execute npm run dev.
 
-# Requirements:
+### Requirements:
 
 Node.js: 18+
 
-# Installation:
+### Installation:
 
 Clone the repository: git clone https://github.com/your-username/zard-next.git
 Navigate to the project directory: cd zard-next
@@ -17,7 +17,7 @@ Usage:
 Run the development server: npm run dev
 Open your browser and visit http://localhost:3000
 
-# Features:
+### Features:
 
 Responsive and intuitive user interface.
 Leveraging Next.js for server-side rendering and routing.
