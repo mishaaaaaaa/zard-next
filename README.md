@@ -10,7 +10,7 @@ Node.js: 18+
 ### Installation:
 
 Clone the repository: git clone https://github.com/mishaaaaaaa/zard-next.git
-Navigate to the project directory: cd zard-next
+Navigate to the project directory: cd zard-next </br>
 Install dependencies: npm install
 
 ### Usage:
