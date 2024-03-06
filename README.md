@@ -9,17 +9,17 @@ Node.js: 18+
 
 ### Installation:
 
-Clone the repository: git clone https://github.com/mishaaaaaaa/zard-next.git
+Clone the repository: git clone https://github.com/mishaaaaaaa/zard-next.git </br>
 Navigate to the project directory: cd zard-next </br>
 Install dependencies: npm install
 
 ### Usage:
-Run the development server: npm run dev
+Run the development server: npm run dev </br>
 Open your browser and visit http://localhost:3000
 
 ### Features:
 
-Responsive and intuitive user interface.
-Leveraging Next.js for server-side rendering and routing.
-Integration with Redux for efficient state management.
-Configured logic for seamless integration with external APIs.
+Responsive and intuitive user interface. </br> 
+Leveraging Next.js for server-side rendering and routing. </br>
+Integration with Redux for efficient state management. </br>
+Configured logic for seamless integration with external APIs. </br>
