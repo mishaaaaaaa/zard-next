@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
@@ -7,10 +7,15 @@ import Card from "@/components/ui/Card/Card";
 
 const ThirdStep = ({ handleNextStep }) => {
   const router = useRouter();
-  const { quiz } = useQuiz();
-  const currentStep = quiz.thirdStep;
-  const storageItem = storage.getItem(STORAGE_STATE.AGE);
-  const [selectedCard, setSelectedCard] = useState(storageItem ? storageItem.answer : "");
+  const { thirdStep: currentStep } = useQuiz();
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  useEffect(() => {
+    const storageItem = storage.getItem(STORAGE_STATE.AGE);
+    if (storageItem) {
+      storage.removeItem(STORAGE_STATE.AGE);
+    }
+  }, []);
 
   const handleSelect = (age) => {
     setSelectedCard(age);

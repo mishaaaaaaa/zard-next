@@ -10,11 +10,15 @@ import Button from "@/components/ui/Button";
 const FourthStep = ({ handleNextStep }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { quiz } = useQuiz();
-  const currentStep = quiz.fourthStep;
+  const { fourthStep: currentStep } = useQuiz();
+  const [hateItems, setHateItems] = useState([]);
 
-  const storageHateList = storage.getItem(STORAGE_STATE.HATE_LIST);
-  const [hateItems, setHateItems] = useState(() => (storageHateList ? storageHateList.answer : []));
+  useEffect(() => {
+    const storageItem = storage.getItem(STORAGE_STATE.HATE_LIST);
+    if (storageItem) {
+      storage.removeItem(STORAGE_STATE.HATE_LIST);
+    }
+  }, []);
 
   useEffect(() => {
     if (hateItems.length > 0) {

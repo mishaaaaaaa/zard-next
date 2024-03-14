@@ -103,7 +103,7 @@ const useQuiz = () => {
       order: "6",
     },
   };
-  return { quiz };
+  return quiz;
 };
 
 export default useQuiz;

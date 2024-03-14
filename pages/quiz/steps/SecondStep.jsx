@@ -1,16 +1,21 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
 import { STORAGE_STATE } from "@/helpers/constants";
 import Card from "@/components/ui/Card/Card";
-import { useEffect, useState } from "react";
 
 const SecondStep = ({ handleNextStep }) => {
   const router = useRouter();
-  const { quiz } = useQuiz();
-  const currentStep = quiz.secondStep;
-  const storageItem = storage.getItem(STORAGE_STATE.GENDER);
-  const [selectedCard, setSelectedCard] = useState(storageItem ? storageItem.answer : "");
+  const { secondStep: currentStep } = useQuiz();
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  useEffect(() => {
+    const storageItem = storage.getItem(STORAGE_STATE.GENDER);
+    if (storageItem) {
+      storage.removeItem(STORAGE_STATE.GENDER);
+    }
+  }, []);
 
   const handleSelect = (gender) => {
     setSelectedCard(gender);

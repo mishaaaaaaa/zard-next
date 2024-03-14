@@ -1,17 +1,22 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useQuiz from "@/hooks/useQuiz";
 import { storage } from "@/helpers/utils";
 import { STORAGE_STATE, langNames } from "@/helpers/constants";
 import Card from "@/components/ui/Card/Card";
-import { useState } from "react";
 
 const FirstStep = ({ handleNextStep }) => {
   const router = useRouter();
   const { pathname, asPath, query } = router;
-  const { quiz } = useQuiz();
-  const currentStep = quiz.firstStep;
-  const storageItem = storage.getItem(STORAGE_STATE.I18N_LANGUAGE);
-  const [selectedCard, setSelectedCard] = useState(storageItem ? storageItem.answer : null);
+  const { firstStep: currentStep } = useQuiz();
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  useEffect(() => {
+    const storageItem = storage.getItem(STORAGE_STATE.I18N_LANGUAGE);
+    if (storageItem) {
+      storage.removeItem(STORAGE_STATE.I18N_LANGUAGE);
+    }
+  }, []);
 
   const handleSelect = async (lang, label) => {
     setSelectedCard(label);

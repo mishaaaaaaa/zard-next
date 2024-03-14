@@ -10,11 +10,15 @@ import Button from "@/components/ui/Button";
 const FifthStep = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { quiz } = useQuiz();
-  const currentStep = quiz.fifthStep;
+  const { fifthStep: currentStep } = useQuiz();
+  const [favItems, setFavItems] = useState([]);
 
-  const storageFavList = storage.getItem(STORAGE_STATE.FAV_LIST);
-  const [favItems, setFavItems] = useState(() => (storageFavList ? storageFavList.answer : []));
+  useEffect(() => {
+    const storageItem = storage.getItem(STORAGE_STATE.FAV_LIST);
+    if (storageItem) {
+      storage.removeItem(STORAGE_STATE.FAV_LIST);
+    }
+  }, []);
 
   useEffect(() => {
     if (favItems.length > 0) {

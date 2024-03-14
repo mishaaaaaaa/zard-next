@@ -13,9 +13,7 @@ import Input from "@/components/ui/Input";
 const Email = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { quiz } = useQuiz();
-  const currentStep = quiz.emailStep;
-
+  const { emailStep: currentStep } = useQuiz();
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
 
@@ -59,16 +57,16 @@ const Email = () => {
           <div className="mt-10">
             <span className="text-zinc-400">{t("emailSubmit.policyAndTerms")} </span>
             <Link href={megaSecretPrivacyLink} target="_blank" className="text-[#EB2F9A]">
-              {t("emailSubmit.privacyPolicy")}{" "}
+              {t("emailSubmit.privacyPolicy")}
             </Link>
             <span className="text-zinc-400">{t("emailSubmit.and")} </span>
             <Link href={megaSecretTermsLink} target="_blank" className="text-[#EB2F9A]">
-              {t("emailSubmit.terms")}{" "}
+              {t("emailSubmit.terms")}
             </Link>
           </div>
         </div>
       </div>
-      <Button disabled={!isValidEmail} onClick={handleSubmit}>
+      <Button disabled={!isValidEmail || [...email].length === 0} onClick={handleSubmit}>
         Next
       </Button>
     </div>
